@@ -3,8 +3,8 @@ import { Menu } from './menu';
 export const MenuList: Menu[] = [
   { id: 11, name: '一级菜单', keyword: 'job',
     childname: [
-      {id: 111, name: '二级子菜单', keyword: 'job', },
-      {id: 112, name: '二级子菜单', keyword: 'job', }
+      {id: 111, name: '二级子菜单职位创建', keyword: 'jobCreate', },
+      {id: 112, name: '二级子菜单职位列表', keyword: 'jobList', }
     ]
   },
   { id: 12, name: '一级菜单', keyword: 'employee',
