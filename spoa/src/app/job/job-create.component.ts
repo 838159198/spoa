@@ -18,15 +18,20 @@ export class JobCreateComponent {
         this.joblist.push({name: this.jobname, code: this.jobcode});
         return  this.joblist;
     }
+    // 提交
     submit() {
         this.joblist = {name: this.jobname, code: this.jobcode};
         console.log(this.jobcode + this.jobcode);
         this.jobService.create('http://shouji.com/api/create', this.joblist).then(
             res => {
-                console.log(res);
+                if (res.success === true) {
+                    this.router.navigate(['/jobList']); // 跳转
+                } else {
+                    alert('操作失败！');
+                }
             }
         );
-        // this.router.navigate(['/jobList']); // 跳转
+
     }
 
 }

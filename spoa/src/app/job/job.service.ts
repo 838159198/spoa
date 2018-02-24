@@ -29,4 +29,20 @@ export class JobService {
             .then(response => response.json())
             .catch(this.handleError);
     }
+    // 更新数据update
+    update(url: string, hero: any) {
+        return this.http
+               .put(url, JSON.stringify(hero), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+    }
+    // 删除数据 delete
+    delete(url: string) {
+        return this.http
+              .delete(url, {headers: this.headers})
+              .toPromise()
+              .then(response => response.json())
+              .catch(this.handleError);
+    }
 }
