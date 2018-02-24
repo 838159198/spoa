@@ -8,8 +8,7 @@ export class JobService {
          this.headers = new Headers({ 'Content-type': 'application/json' });
      }
     // 获取数据
-    getjobs() {
-        const url = 'http://shouji.com/api/spoa2';
+    getjobs(url: any) {
         return this.http.get(url)
             .toPromise()
             .then(res => res.json())

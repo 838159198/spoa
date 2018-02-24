@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobComponent } from './job.component';
 import { JobService } from './job.service';
+import { Router } from '@angular/router';
 // import { JobCreateComponent } from './job-create.component';
 
 
@@ -11,11 +12,11 @@ import { JobService } from './job.service';
 
 export class JobListComponent implements OnInit {
     jobLists: any[];
-    constructor(protected jobService: JobService) {
+    constructor(protected jobService: JobService, protected router: Router) {
 
     }
     ngOnInit() {
-       this.jobService.getjobs().then(
+       this.jobService.getjobs('http://shouji.com/api/spoa2').then(
            res => {
                this.jobLists = res.jobLists;
                 console.log(this.jobLists);
@@ -36,6 +37,10 @@ export class JobListComponent implements OnInit {
                 }
             }
         );
+    }
+    // 修改
+    onModify(e) {
+        this.router.navigate(['/jobCreate/' + e ]); // 跳转
     }
 
 }

@@ -15,13 +15,14 @@ import { JobService } from './job/job.service';
 
 // 路由
 export const ROUTES: Routes = [
-  {path: '', component: EmptyComponent},
+
   {path: 'index', component: EmptyComponent},
   {path: 'job'  , component: JobComponent},
+  {path: 'jobCreate/:id', component: JobCreateComponent},
   {path: 'jobCreate', component: JobCreateComponent},
   {path: 'jobList', component: JobListComponent},
   {path: 'employee', component: EmployeeComponent},
-
+  {path: '**', component: EmptyComponent}, // **通配符，路径为空或找不到该路径都会采用通配符路径
 ];
 
 

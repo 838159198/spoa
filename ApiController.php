@@ -58,7 +58,14 @@ class ApiController extends Controller
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
         header('Access-Control-Allow-Methods: POST,GET,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT');
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
             $sql="select * from `app_node`";
+            if(!empty($id)){
+                $sql.=" where id = {$id}";
+            }else{
+                $sql.=" order by id desc";
+            }
+
             $result=yii::app()->db->createCommand($sql)->queryAll();
             $result=!empty($result) ? $result : array();
             $array=array(
@@ -99,6 +106,22 @@ class ApiController extends Controller
         }
     }
 
+    // 更新数据
+    public function actionUpdate(){
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+        header('Access-Control-Allow-Methods: POST,GET,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT');
+        $id= isset($_GET['id']) ? $_GET['id'] : '';
+        $a= json_decode(file_get_contents("php://input"),true);
+        $sql="update `app_node` set `name`= '{$a["name"]}' , `code` = '{$a["code"]}' where id = {$id}";
+
+        $result = yii::app()->db->createCommand($sql)->query();
+        if($result){
+            echo json_encode(array('success'=>true));
+        }else{
+            echo json_encode(array('success'=>false));
+        }
+    }
 
     /**
      *  ROM：J1-根据统计软件序列号+签名md5，获取用户正在做的所有业务列表

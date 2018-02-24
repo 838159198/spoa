@@ -1,5 +1,5 @@
 <h1>创建职位</h1>
 
-<input type="text" placeholder="请填写职位名称" [(ngModel)]="jobname">
-<input type="text" placeholder="请填写职位简称" [(ngModel)]="jobcode">
+<input  [value]="this.jobname === undefined || this.jobname === null ? '' : this.jobname" type="text" placeholder="请填写职位名称" [(ngModel)]="jobname">
+<input [value]="this.jobcode === undefined || this.jobcode === null ? '' : this.jobcode" type="text" placeholder="请填写职位简称" [(ngModel)]="jobcode">
 <button (click)="submit()">提交</button>

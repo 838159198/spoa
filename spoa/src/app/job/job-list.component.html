@@ -1,4 +1,4 @@
 <h1>职位列表</h1>
 <div *ngFor="let list of this.jobLists">
-    <p>{{list.name}}------{{list.code}} ----<a (click)="onDelete(list.id)">删除</a></p>
+    <p>{{list.name}}------{{list.code}} ----<a (click)="onDelete(list.id)">删除</a> -------<a (click)="onModify(list.id)">修改</a></p>
 </div>
