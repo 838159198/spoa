@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobComponent } from './job.component';
+import { JobService } from './job.service';
 // import { JobCreateComponent } from './job-create.component';
 
 
@@ -9,8 +10,18 @@ import { JobComponent } from './job.component';
 })
 
 export class JobListComponent implements OnInit {
+    jobLists: any[];
+    constructor(protected jobService: JobService) {
 
+    }
     ngOnInit() {
+       this.jobService.getjobs().then(
+           res => {
+               this.jobLists = res.jobLists;
+                console.log(this.jobLists);
+            }
+        );
+
 
     }
 

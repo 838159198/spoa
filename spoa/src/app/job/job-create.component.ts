@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JobService } from './job.service';
 
 @Component({
     selector: 'app-job-create',
@@ -10,7 +11,7 @@ export class JobCreateComponent {
     jobname: string;
     jobcode: string;
     joblist: any;
-    constructor(protected router: Router) {
+    constructor(protected router: Router, protected jobService: JobService) {
 
     }
     array(): void {
@@ -18,8 +19,14 @@ export class JobCreateComponent {
         return  this.joblist;
     }
     submit() {
+        this.joblist = {name: this.jobname, code: this.jobcode};
         console.log(this.jobcode + this.jobcode);
-        this.router.navigate(['/jobList']); // 跳转
+        this.jobService.create('http://shouji.com/api/create', this.joblist).then(
+            res => {
+                console.log(res);
+            }
+        );
+        // this.router.navigate(['/jobList']); // 跳转
     }
 
 }
