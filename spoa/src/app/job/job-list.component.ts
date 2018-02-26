@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { JobComponent } from './job.component';
 import { JobService } from './job.service';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../alert/alert.component';
 // import { JobCreateComponent } from './job-create.component';
 
 
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 
 export class JobListComponent implements OnInit {
     jobLists: any[];
+    content: any;
+    @ViewChild(AlertComponent) alertCom: AlertComponent;
     constructor(protected jobService: JobService, protected router: Router) {
 
     }
@@ -41,6 +44,11 @@ export class JobListComponent implements OnInit {
     // 修改
     onModify(e) {
         this.router.navigate(['/jobCreate/' + e ]); // 跳转
+    }
+
+    ontan() {
+        this.content = '我是个列表！';
+        this.alertCom.open();
     }
 
 }

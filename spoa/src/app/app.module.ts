@@ -15,6 +15,7 @@ import { JobService } from './job/job.service';
 import { PersonComponent } from './employee/person.component';
 import { EmployeeService } from './employee/employee.sevice';
 import { EmptyModule } from './empty/empty.module';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -41,6 +42,7 @@ export const ROUTES: Routes = [
     JobCreateComponent,
     JobListComponent,
     PersonComponent,
+    AlertComponent,
 
   ],
   imports: [
