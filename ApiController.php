@@ -123,6 +123,70 @@ class ApiController extends Controller
         }
     }
 
+    // 抓取数据 存数据
+    public function actionData(){
+        $json = file_get_contents('https://digibyte-skein.miningpoolhub.com/index.php?page=api&action=getuserworkers&api_key=f7cad930a4fb8d8ba7fa6aa8ba3fa965da29d88ac2658b1e75d7c922eea91caa');
+        $array = json_decode($json,true);
+        // print_r($array);exit;
+        foreach($array['getuserworkers']['data'] as $key =>$v){
+            $sql=" INSERT INTO `app_data_obtain` (`id`,`username`,`password`,`monitor`,`hashrate`,`difficulty`,`version`,`date`,`runtime`,`datetime`,`channel`) VALUES ('{$v["id"]}', '{$v["username"]}', '{$v["password"]}', '{$v["monitor"]}', '{$v["hashrate"]}', '{$v["difficulty"]}', '{$array["getuserworkers"]["version"]}', now(), '{$array["getuserworkers"]["runtime"]}',now(),'sl' )";
+            $result=yii::app()->db->createCommand($sql)->query();
+        }
+    }
+    // 抓取数据放到文本里面
+    public function actionPut(){
+        $json = file_get_contents('https://digibyte-skein.miningpoolhub.com/index.php?page=api&action=getuserworkers&api_key=f7cad930a4fb8d8ba7fa6aa8ba3fa965da29d88ac2658b1e75d7c922eea91caa');
+        $time=date('Y-m-d H:i:s');
+        file_put_contents('json.txt', $time.'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'.PHP_EOL.PHP_EOL.$json.PHP_EOL.PHP_EOL,FILE_APPEND);
+    }
+
+    public function actionCeshi(){
+        $a='adada';
+        $b=serialize($a);
+        echo $b;
+        $c =unserialize($b);
+        echo $c;
+    }
+
+     // 新增数据
+    public function actionEmployee(){
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+        header('Access-Control-Allow-Methods: POST,GET,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT');
+        $a = json_decode(file_get_contents("php://input"),true);
+        $name= isset($a['username']) ? $a['username'] : 'error';
+        $code= isset($a['password']) ? $a['password'] : 'error';
+
+        $sql="INSERT INTO  `app_employee` (`username`,`password`) values ('{$name}','{$code}')";
+        $result=yii::app()->db->createCommand($sql)->query();
+        if($result) {
+            echo json_encode(array('success'=>true));
+        }else{
+            echo json_encode(array('success'=>false));
+        }
+        
+    }
+
+     // 获取数据
+    public function actionEmployeeAll(){
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+        header('Access-Control-Allow-Methods: POST,GET,HEAD,OPTIONS,PUT,DELETE,TRACE,CONNECT');
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
+            $sql="select * from `app_employee`";
+            if(!empty($id)){
+                $sql.=" where id = {$id}";
+            }else{
+                $sql.=" order by id desc";
+            }
+
+            $result=yii::app()->db->createCommand($sql)->queryAll();
+            $result=!empty($result) ? $result : array();
+            $array=array(
+                'jobLists'=>$result
+            );
+        echo json_encode($array);
+    }
     /**
      *  ROM：J1-根据统计软件序列号+签名md5，获取用户正在做的所有业务列表
      *  https://www.sutuiapp.com/api/GetApplist?appNo=100001&sign=52d16d4a9117342cedd35592f3b0baee
