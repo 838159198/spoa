@@ -12,6 +12,12 @@ import { EmployeeComponent } from './employee/employee.component';
 import { JobCreateComponent } from './job/job-create.component';
 import { JobListComponent } from './job/job-list.component';
 import { JobService } from './job/job.service';
+import { PersonComponent } from './employee/person.component';
+import { EmployeeService } from './employee/employee.sevice';
+import { EmptyModule } from './empty/empty.module';
+
+
+
 
 // 路由
 export const ROUTES: Routes = [
@@ -34,14 +40,17 @@ export const ROUTES: Routes = [
     EmployeeComponent,
     JobCreateComponent,
     JobListComponent,
+    PersonComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    EmptyModule,
     RouterModule.forRoot(ROUTES),
   ],
-  providers: [MenuService, JobService],
+  providers: [MenuService, JobService, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

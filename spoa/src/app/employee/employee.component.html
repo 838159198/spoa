@@ -1,1 +1,8 @@
 <h1>我是employee</h1>
+<app-person [type]="fill" (whenCreate)="onCreate($event)"></app-person>
+
+
+<ul *ngFor="let list of employeeLists;index as i">
+    <li>{{list.username}}------{{list.password}}</li>
+
+</ul>
