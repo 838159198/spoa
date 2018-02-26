@@ -16,6 +16,8 @@ import { PersonComponent } from './employee/person.component';
 import { EmployeeService } from './employee/employee.sevice';
 import { EmptyModule } from './empty/empty.module';
 import { AlertComponent } from './alert/alert.component';
+import { ChildrenComponent } from './employee/mylist/children.component';
+import { BirdWidgetComponent } from './job/widget/bird.widget';
 
 
 
@@ -43,6 +45,8 @@ export const ROUTES: Routes = [
     JobListComponent,
     PersonComponent,
     AlertComponent,
+    ChildrenComponent,
+    BirdWidgetComponent,
 
   ],
   imports: [
