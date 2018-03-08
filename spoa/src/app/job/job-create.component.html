@@ -3,3 +3,17 @@
 <input  [value]="this.jobname === undefined || this.jobname === null ? '' : this.jobname" type="text" placeholder="请填写职位名称" [(ngModel)]="jobname">
 <input [value]="this.jobcode === undefined || this.jobcode === null ? '' : this.jobcode" type="text" placeholder="请填写职位简称" [(ngModel)]="jobcode">
 <button (click)="submit()">提交</button>
+
+<br>
+
+<button (click)="ontan()">弹出窗</button>
+<app-alert [content] = "this.content"></app-alert>
+
+
+<br>
+<br>
+<br>
+<app-children>
+
+    <h2>阿达大道所大</h2>
+</app-children>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from './job.service';
+import { AlertComponent } from '../alert/alert.component';
 
 
 @Component({
@@ -13,6 +14,8 @@ export class JobCreateComponent implements OnInit {
     jobcode: string;
     joblist: any;
     jobId: number; // 更新的id
+    content: any; // 弹出框内容
+    @ViewChild(AlertComponent) alertCom: AlertComponent;
     constructor(protected router: Router, protected jobService: JobService, protected route: ActivatedRoute) {
 
     }
@@ -59,6 +62,13 @@ export class JobCreateComponent implements OnInit {
         }
 
 
+    }
+
+    // 弹出框
+
+    ontan() {
+        this.content = '是否确认删除！';
+        this.alertCom.open();
     }
 
 }
